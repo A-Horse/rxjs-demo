@@ -1,1 +1,3 @@
 <p>book-detail works!</p>
+
+<div *ngIf="book$" n>name: {{ (book$ | async).name }}</div>

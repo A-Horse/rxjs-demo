@@ -1,10 +1,19 @@
 <p>book-list works!</p>
 
 <div>
-    <ul>
-        <li *ngFor="let book of book$ | async">
-            {{book.name}}
-        </li>
-    </ul>
+  <ul>
+    <li
+      *ngFor="let book of book$ | async"
+      (click)="selectedBookName = book.name"
+    >
+      {{ book.name }}
+    </li>
+  </ul>
+</div>
 
+<div>
+  <app-book-detail
+    *ngIf="selectedBookName"
+    [name]="selectedBookName"
+  ></app-book-detail>
 </div>
