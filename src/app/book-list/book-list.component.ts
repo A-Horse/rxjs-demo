@@ -20,6 +20,12 @@ export class BookListComponent implements OnInit {
         { name: "clean code", price: 100 },
         { name: "refactor", price: 120 }
       ]);
-    }, 300);
+    }, 3000);
+
+    setTimeout(() => {
+      this.stateService.replaceBooks([
+        { name: "clean code", price: 100 },
+      ]);
+    }, 5000);
   }
 }
