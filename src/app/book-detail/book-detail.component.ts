@@ -1,6 +1,7 @@
-import { StateService } from "./../state.service";
 import { Observable } from "rxjs";
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Inject } from "@angular/core";
+import { StateProvider } from "../book-list/book-list.component";
+import { State, IBook } from "../state.interface";
 
 @Component({
   selector: "app-book-detail",
@@ -9,13 +10,12 @@ import { Component, OnInit, Input } from "@angular/core";
 })
 export class BookDetailComponent implements OnInit {
   @Input() set name(name: string) {
-    this.book$ =  this.stateService.getBookDetail$(name);
+    this.book$ = this.stateService.getBookDetail$(name);
   }
 
-  book$: Observable<any>;
+  book$: Observable<IBook>;
 
-  constructor(private stateService: StateService) {}
+  constructor(@Inject(StateProvider) public stateService: State) {}
 
   ngOnInit() {}
-
 }

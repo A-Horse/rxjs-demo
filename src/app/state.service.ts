@@ -1,11 +1,12 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { map, take } from "rxjs/operators";
+import { State } from "./state.interface";
 
 @Injectable({
   providedIn: "root"
 })
-export class StateService {
+export class StateService implements State {
   private books$ = new BehaviorSubject([]);
 
   constructor() {}
@@ -24,5 +25,11 @@ export class StateService {
         return books.find(book => book.name === bookname);
       })
     );
+  }
+
+  public addBook(book: any): void {
+    this.books$.pipe(take(1)).subscribe(books => {
+      this.books$.next(books.concat(book));
+    });
   }
 }
